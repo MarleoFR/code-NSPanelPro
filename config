@@ -1,0 +1,4294 @@
+kiosk_mode:
+  non_admin_settings:
+    hide_header: true
+    ignore_entity_settings: true
+title: Maison Marleo
+views:
+  - theme: noctis
+    path: Home
+    title: Home
+    type: custom:masonry-layout
+    layout:
+      width: 320
+      height: 400
+    icon: mdi:home
+    badges: []
+    cards:
+      - type: custom:stack-in-card
+        cards:
+          - type: custom:layout-card
+            layout_type: masonry
+            layout: {}
+            cards:
+              - type: custom:swipe-card
+                cards:
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home
+                        layout: vertical
+                        icon_color: '#0066CC'
+                        tap_action:
+                          action: navigate
+                          navigation_path: home
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-shutter
+                        layout: vertical
+                        icon_color: '#00FF80'
+                        tap_action:
+                          action: navigate
+                          navigation_path: volets
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:lightbulb
+                        layout: vertical
+                        icon_color: '#FFFF00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: lumiere
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:garage-variant
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Garage
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:thermometer
+                        layout: vertical
+                        icon_color: '#FF3333'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Température
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-open-variant
+                        layout: vertical
+                        icon_color: '#808080'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ouverture
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                              }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:pool
+                        layout: vertical
+                        icon_color: '#0000FF'
+                        tap_action:
+                          action: navigate
+                          navigation_path: piscine
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:music
+                        layout: vertical
+                        icon_color: purple
+                        tap_action:
+                          action: navigate
+                          navigation_path: musique
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:television-classic
+                        layout: vertical
+                        icon_color: '#FF3399'
+                        tap_action:
+                          action: navigate
+                          navigation_path: télé
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:security
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Securité
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:network
+                        layout: vertical
+                        icon_color: '#00CC00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: network
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }            
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home-assistant
+                        layout: vertical
+                        icon_color: '#87cefa'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ha
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }                   
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mushroom-title-card
+                    title: |-
+                      {% set time = now().hour %}
+                      {% if (time >= 18) %} 
+                       Bonsoir, {{user}}!
+                      {% elif (time >= 12) %}
+                       Bon après midi, {{user}}!
+                      {% elif (time >= 5) %}
+                       Bonjour, {{user}}!
+                      {% else %}
+                       Salut, {{user}}
+                      {% endif %}
+                    alignment: center
+                    subtitle: ''
+                    card_mod:
+                      style: |
+                        ha-card {
+                        box-shadow: none;
+                        background: none;
+                          }
+                  - type: custom:mushroom-template-card
+                    primary: Boîte aux lettres
+                    secondary: |-
+                      {% set state=states('input_boolean.courrier_present') %}
+                      {% if state=='on' %}
+                      Vous avez du courrier
+                      {% elif state=='off' %}
+                      Vous n'avez pas de courrier
+                      {% else %}
+                      Boite au lettre hors service
+                      {% endif %}
+                    icon: |-
+                      {% set state=states('input_boolean.courrier_present') %}
+                      {% if state=='on' %}
+                      mdi:mailbox-open
+                      {% elif state=='off' %}
+                      mdi:mailbox
+                      {% else %}
+                      mdi:mailbox-outline
+                      {% endif %}
+                    entity: input_boolean.courrier_present
+                    icon_color: |-
+                      {% set state=states('input_boolean.courrier_present') %}
+                      {% if state=='on' %}
+                      green
+                      {% elif state=='off' %}
+                      blue
+                      {% else %}
+                      red
+                      {% endif %}
+                    tap_action:
+                      action: toggle
+                    card_mod:
+                      style:
+                        mushroom-state-info$: |
+                          .secondary {
+                            font-size: 11px !important;
+                            position: relative;
+                            overflow: visible !important;
+                            top: 0px;
+                            left: 0px;
+                          }
+                        mushroom-shape-icon$: |
+                          .shape {
+                            position: relative;
+                            left: -0px;
+                            top: -0px;
+                          }
+                        .: |
+                          :host {
+                            --mush-icon-size: 50px;
+                          }
+                          style: |
+                            mushroom-badge-icon {
+                            left: 0px;
+                            top: 0px;
+                          }
+                          ha-card {
+                            box-shadow: none;
+                            background: none;
+                            margin-left: -10px 
+                            
+              - type: horizontal-stack
+                cards:
+                  - type: custom:simple-weather-card
+                    entity: weather.precigne
+                    name: à Précigné
+                    card_mod:
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background: none;
+                          height: 20px;
+                        }
+              - type: custom:atomic-calendar-revive
+                entities:
+                  - entity: calendar.numeros_de_semaine
+                    name: Numéros de semaine
+                  - entity: calendar.agenda
+                    name: Agenda
+                  - entity: calendar.personnel
+                    name: Personnel
+                  - entity: calendar.rappels
+                    name: Rappels
+                  - entity: calendar.travail
+                    name: travail
+                  - entity: calendar.garbage_collection
+                    name: Garbage Collection
+                firstDayOfWeek: 1
+                maxDaysToShow: 7
+                refreshInterval: 60
+                showRelativeTime: false
+                calShowDescription: false
+                showWeekNumber: false
+                showDescription: false
+                sortByStartTime: false
+                hideFinishedEvents: false
+                card_mod:
+                  style: |
+                    ha-card {
+                      box-shadow: none;
+                      background: none;
+                    }
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: ''
+                    secondary: Volets
+                    icon: mdi:window-shutter
+                    entity: cover.piece_de_vie
+                    layout: vertical
+                    icon_color: |
+                      {% if is_state(entity, 'open') %}
+                      blue
+                      {% else %}  
+                      grey
+                      {% endif %}
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background: var(--card-background-color);
+                          width: 66px;
+                          border-radius: 30px;
+                          margin-left: auto;
+                          margin-right: auto;
+                          margin-bottom: 2px;
+                          position: relative;
+                          top: -10px;
+                        }
+                  - type: custom:mushroom-template-card
+                    primary: ''
+                    secondary: Salon
+                    icon: mdi:lightbulb
+                    entity: light.led_salon
+                    layout: vertical
+                    icon_color: |
+                      {% if is_state(entity, 'on') %}
+                      yellow
+                      {% else %}  
+                      grey
+                      {% endif %}
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background: var(--card-background-color);
+                          width: 66px;
+                          height: 30px;
+                          border-radius: 30px;
+                          margin-left: auto;
+                          margin-right: auto;
+                          margin-bottom: 0px;
+                          position: relative;
+                          top: -10px;
+                        }
+                  - type: custom:mushroom-template-card
+                    primary: ''
+                    secondary: Portail
+                    icon: mdi:gate
+                    entity: script.portail
+                    layout: vertical
+                    icon_color: |
+                      {% if is_state(entity, 'on') %}
+                      green
+                      {% else %}  
+                      grey
+                      {% endif %}
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background: var(--card-background-color);
+                          width: 66px;
+                          height: 30px;
+                          border-radius: 30px;
+                          margin-left: auto;
+                          margin-right: auto;
+                          margin-bottom: 0px;
+                          position: relative;
+                          top: -10px;
+                        }                   
+                  - type: custom:mushroom-entity-card
+                    primary: Camera
+                    secondary_info: none
+                    icon: mdi:cctv
+                    entity: camera.camera_allee_sd_stream
+                    layout: vertical
+                    icon_color: null
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background: var(--card-background-color);
+                          width: 66px;
+                          height: 30px;
+                          border-radius: 30px;
+                          margin-left: auto;
+                          margin-right: auto;
+                          margin-bottom: 0px;
+                          position: relative;
+                          top: -10px;
+                        } 
+        card_mod:
+          style: |
+            ha-card {
+              padding: 1px;
+            }
+  - theme: noctis
+    title: Volets
+    path: volets
+    icon: mdi:window-shutter
+    badges: []
+    cards:
+      - type: custom:stack-in-card
+        cards:
+          - type: custom:layout-card
+            layout_type: masonry
+            layout: {}
+            cards:
+              - type: custom:swipe-card
+                cards:
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home
+                        layout: vertical
+                        icon_color: '#0066CC'
+                        tap_action:
+                          action: navigate
+                          navigation_path: home
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-shutter
+                        layout: vertical
+                        icon_color: '#00FF80'
+                        tap_action:
+                          action: navigate
+                          navigation_path: volets
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:lightbulb
+                        layout: vertical
+                        icon_color: '#FFFF00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: lumiere
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:garage-variant
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Garage
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:thermometer
+                        layout: vertical
+                        icon_color: '#FF3333'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Température
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-open-variant
+                        layout: vertical
+                        icon_color: '#808080'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ouverture
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                              }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:pool
+                        layout: vertical
+                        icon_color: '#0000FF'
+                        tap_action:
+                          action: navigate
+                          navigation_path: piscine
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:music
+                        layout: vertical
+                        icon_color: purple
+                        tap_action:
+                          action: navigate
+                          navigation_path: musique
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:television-classic
+                        layout: vertical
+                        icon_color: '#FF3399'
+                        tap_action:
+                          action: navigate
+                          navigation_path: télé
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:security
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Securité
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:network
+                        layout: vertical
+                        icon_color: '#00CC00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: network
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }            
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home-assistant
+                        layout: vertical
+                        icon_color: '#87cefa'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ha
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }   
+              - type: custom:stack-in-card
+                mode: vertical
+                cards:
+                  - type: custom:mushroom-template-card
+                    icon: |
+                      {% if is_state('cover.centrale_volets', 'open') %} 
+                        mdi:window-shutter-open
+                      {% else %}
+                        mdi:window-shutter
+                      {% endif %}
+                    icon_color: |
+                      {% if is_state('cover.centrale_volets','closed') %}
+                      grey
+                      {% else %}
+                      #00FF80
+                      {% endif %}
+                    primary: Volets
+                    secondary: >
+                      {% set all = expand('cover.centrale_volets')| list -%} {%
+                      set closed1 = all |
+                       selectattr('state','eq','closed')|list|count%}
+                       {% set open1 = all | selectattr('state','eq','open')|list|count%}
+                       Fermés : {{closed1}} / ouverts : {{open1}}
+                    layout: horizontal
+                    fill_container: false
+                    entity: cover.centrale_volets
+                    card_mod:
+                      style:
+                        mushroom-state-info$: |
+                          .primary {
+                            font-size: 30px !important;
+                            position: relative;
+                            top: -20px;
+                            left: -20px;
+                            overflow: visible !important;
+                            white-space: normal !important;
+                          }
+                          .secondary {
+                            font-size: 13px !important;
+                            position: relative;
+                            overflow: visible !important;
+                            top: -45px;
+                            left: 130px;
+                          }
+                        mushroom-shape-icon$: |
+                          .shape {
+                            position: relative;
+                            left: -30px;
+                            top: -35px;
+                          }
+                        .: |
+                          :host {
+                            --mush-icon-size: 100px;
+                          }
+                          style: |
+                            mushroom-badge-icon {
+                            left: 60px;
+                            top: 25px;
+                          }
+                          ha-card {
+                            box-shadow: none;
+                            background: none;
+                            margin-bottom: -40px  
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-cover-card
+                        entity: cover.centrale_volets
+                        icon: mdi:window-shutter
+                        layout: horizontal
+                        show_buttons_control: true
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background: var(--card-background-color);
+                              width: 380px;
+                              margin-left: auto;
+                              margin-right: auto;
+                              position: relative;
+                            } 
+                      - type: custom:mushroom-entity-card
+                        entity: cover.centrale_volets
+                        tap_action:
+                          action: call-service
+                          service: cover.stop_cover
+                          target:
+                            entity_id: cover.centrale_volets
+                        data: {}
+                        primary_info: none
+                        secondary_info: none
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        icon: mdi:star-check
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background: var(--card-background-color);
+                              margin-left: auto;
+                              margin-right: auto;
+                              margin-bottom: 0px;
+                              position: relative;
+                              left: 150px;
+                            }
+                          icon_color: |
+                            {% if is_state('cover.centrale_volets','stop') %}
+                            grey
+                            {% else %}
+                            #00FF80
+                            {% endif %}
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-cover-card
+                        entity: cover.cuisine
+                        icon: mdi:window-shutter
+                        layout: horizontal
+                        show_buttons_control: true
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background: var(--card-background-color);
+                              width: 380px;
+                              margin-left: auto;
+                              margin-right: auto;
+                              position: relative;
+                            } 
+                      - type: custom:mushroom-entity-card
+                        entity: cover.cuisine
+                        tap_action:
+                          action: call-service
+                          service: cover.stop_cover
+                          target:
+                            entity_id: cover.cuisine
+                        data: {}
+                        primary_info: none
+                        secondary_info: none
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        icon: mdi:star-check
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background: var(--card-background-color);
+                              margin-left: auto;
+                              margin-right: auto;
+                              margin-bottom: 0px;
+                              position: relative;
+                              left: 150px;
+                            }                    
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-cover-card
+                        entity: cover.salon
+                        icon: mdi:window-shutter
+                        layout: horizontal
+                        show_buttons_control: true
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background: var(--card-background-color);
+                              width: 380px;
+                              margin-left: auto;
+                              margin-right: auto;
+                              position: relative;
+                            } 
+                      - type: custom:mushroom-entity-card
+                        entity: cover.salon
+                        tap_action:
+                          action: call-service
+                          service: cover.stop_cover
+                          target:
+                            entity_id: cover.salon
+                        data: {}
+                        primary_info: none
+                        secondary_info: none
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        icon: mdi:star-check
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background: var(--card-background-color);
+                              margin-left: auto;
+                              margin-right: auto;
+                              margin-bottom: 0px;
+                              position: relative;
+                              left: 150px;
+                            }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-cover-card
+                        entity: cover.salle_a_manger
+                        icon: mdi:window-shutter
+                        layout: horizontal
+                        show_buttons_control: true
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background: var(--card-background-color);
+                              width: 380px;
+                              margin-left: auto;
+                              margin-right: auto;
+                              position: relative;
+                            } 
+                      - type: custom:mushroom-entity-card
+                        entity: cover.salle_a_manger
+                        tap_action:
+                          action: call-service
+                          service: cover.stop_cover
+                          target:
+                            entity_id: cover.salle_a_manger
+                        data: {}
+                        primary_info: none
+                        secondary_info: none
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        icon: mdi:star-check
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background: var(--card-background-color);
+                              margin-left: auto;
+                              margin-right: auto;
+                              margin-bottom: 0px;
+                              position: relative;
+                              left: 150px;
+                            }                    
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-cover-card
+                        entity: cover.chambremalio
+                        icon: mdi:window-shutter
+                        layout: horizontal
+                        show_buttons_control: true
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background: var(--card-background-color);
+                              width: 380px;
+                              margin-left: auto;
+                              margin-right: auto;
+                              position: relative;
+                            } 
+                      - type: custom:mushroom-entity-card
+                        entity: cover.chambremalio
+                        tap_action:
+                          action: call-service
+                          service: cover.stop_cover
+                          target:
+                            entity_id: cover.chambremalio
+                        data: {}
+                        primary_info: none
+                        secondary_info: none
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        icon: mdi:star-check
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background: var(--card-background-color);
+                              margin-left: auto;
+                              margin-right: auto;
+                              margin-bottom: 0px;
+                              position: relative;
+                              left: 150px;
+                            }
+                          icon_color: |
+                            {% if is_state('cover.centrale_volets','stop') %}
+                            blue
+                            {% else %}
+                            blue
+                            {% endif %}
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-cover-card
+                        entity: cover.chambremargot
+                        icon: mdi:window-shutter
+                        layout: horizontal
+                        show_buttons_control: true
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background: var(--card-background-color);
+                              width: 380px;
+                              margin-left: auto;
+                              margin-right: auto;
+                              position: relative;
+                            } 
+                      - type: custom:mushroom-entity-card
+                        entity: cover.chambremargot
+                        tap_action:
+                          action: call-service
+                          service: cover.stop_cover
+                          target:
+                            entity_id: cover.chambremargot
+                        data: {}
+                        primary_info: none
+                        secondary_info: none
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        icon: mdi:star-check
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background: var(--card-background-color);
+                              margin-left: auto;
+                              margin-right: auto;
+                              margin-bottom: 0px;
+                              position: relative;
+                              left: 150px;
+                            }
+                          icon_color: |
+                            {% if is_state('cover.centrale_volets','stop') %}
+                            blue
+                            {% else %}
+                            blue
+                            {% endif %}
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-cover-card
+                        entity: cover.chambreleonie
+                        icon: mdi:window-shutter
+                        layout: horizontal
+                        show_buttons_control: true
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background: var(--card-background-color);
+                              width: 380px;
+                              margin-left: auto;
+                              margin-right: auto;
+                              position: relative;
+                            } 
+                      - type: custom:mushroom-entity-card
+                        entity: cover.centrale_volets
+                        tap_action:
+                          action: call-service
+                          service: cover.stop_cover
+                          target:
+                            entity_id: cover.chambreleonie
+                        data: {}
+                        primary_info: none
+                        secondary_info: none
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        icon: mdi:star-check
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background: var(--card-background-color);
+                              margin-left: auto;
+                              margin-right: auto;
+                              margin-bottom: 0px;
+                              position: relative;
+                              left: 150px;
+                            }
+                          icon_color: |
+                            {% if is_state('cover.centrale_volets','stop') %}
+                            blue
+                            {% else %}
+                            blue
+                            {% endif %}
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-cover-card
+                        entity: cover.chambreamis
+                        icon: mdi:window-shutter
+                        layout: horizontal
+                        show_buttons_control: true
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background: var(--card-background-color);
+                              width: 380px;
+                              margin-left: auto;
+                              margin-right: auto;
+                              position: relative;
+                            } 
+                      - type: custom:mushroom-entity-card
+                        entity: cover.centrale_volets
+                        tap_action:
+                          action: call-service
+                          service: cover.stop_cover
+                          target:
+                            entity_id: cover.chambreamis
+                        data: {}
+                        primary_info: none
+                        secondary_info: none
+                        hold_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        icon: mdi:star-check
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background: var(--card-background-color);
+                              margin-left: auto;
+                              margin-right: auto;
+                              margin-bottom: 0px;
+                              position: relative;
+                              left: 150px;
+                            }
+                          icon_color: |
+                            {% if is_state('cover.centrale_volets','stop') %}
+                            blue
+                            {% else %}
+                            blue
+                            {% endif %}
+                card_mod:
+                  style: |
+                    ha-card { 
+                    border-radius: 30px;
+                    }              
+        card_mod:
+          style: |
+            ha-card {
+              padding: 1px;
+
+              background: rgba(var(--rgb-primary-text-color), 0.01);
+            }
+  - theme: noctis
+    icon: mdi:lightbulb
+    path: lumiere
+    title: lumiere
+    badges: []
+    cards:
+      - type: custom:stack-in-card
+        cards:
+          - type: custom:layout-card
+            layout_type: masonry
+            layout: {}
+            cards:
+              - type: custom:swipe-card
+                cards:
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home
+                        layout: vertical
+                        icon_color: '#0066CC'
+                        tap_action:
+                          action: navigate
+                          navigation_path: home
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-shutter
+                        layout: vertical
+                        icon_color: '#00FF80'
+                        tap_action:
+                          action: navigate
+                          navigation_path: volets
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:lightbulb
+                        layout: vertical
+                        icon_color: '#FFFF00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: lumiere
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:garage-variant
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Garage
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:thermometer
+                        layout: vertical
+                        icon_color: '#FF3333'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Température
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-open-variant
+                        layout: vertical
+                        icon_color: '#808080'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ouverture
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                              }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:pool
+                        layout: vertical
+                        icon_color: '#0000FF'
+                        tap_action:
+                          action: navigate
+                          navigation_path: piscine
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:music
+                        layout: vertical
+                        icon_color: purple
+                        tap_action:
+                          action: navigate
+                          navigation_path: musique
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:television-classic
+                        layout: vertical
+                        icon_color: '#FF3399'
+                        tap_action:
+                          action: navigate
+                          navigation_path: télé
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:security
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Securité
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:network
+                        layout: vertical
+                        icon_color: '#00CC00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: network
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }            
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home-assistant
+                        layout: vertical
+                        icon_color: '#87cefa'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ha
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }   
+              - type: custom:stack-in-card
+                mode: vertical
+                cards:
+                  - type: custom:mushroom-template-card
+                    icon: |
+                      {% if is_state('light.lumieres','on') %} 
+                       mdi:lightbulb-group
+                      {% else %}
+                       mdi:lightbulb-group-off
+                      {% endif %}
+                    icon_color: |
+                      {% if is_state('light.lumieres','off') %}
+                       grey
+                      {% else %}
+                       yellow
+                      {% endif %}
+                    primary: Lumières
+                    secondary: >
+                      {% set all = expand(('light.lumieres'),('switch.prises'))|
+                      list -%} {% set off1 = all |
+                       selectattr('state','eq','off')|list|count%}
+                       {% set on1 = all | selectattr('state','eq','on')|list|count%}
+                       Eteints : {{off1}} / Allumées : {{on1}}
+                    layout: horizontal
+                    fill_container: false
+                    entity: script.eteindre_lumieres
+                    card_mod:
+                      style:
+                        mushroom-state-info$: |
+                          .primary {
+                            font-size: 30px !important;
+                            position: relative;
+                            top: -20px;
+                            left: -20px;
+                            overflow: visible !important;
+                            white-space: normal !important;
+                          }
+                          .secondary {
+                            font-size: 13px !important;
+                            position: relative;
+                            overflow: visible !important;
+                            top: -45px;
+                            left: 130px;
+                          }
+                        mushroom-shape-icon$: |
+                          .shape {
+                            position: relative;
+                            left: -30px;
+                            top: -35px;
+                          }
+                        .: |
+                          :host {
+                            --mush-icon-size: 100px;
+                          }
+                          style: |
+                            mushroom-badge-icon {
+                            left: 60px;
+                            top: 25px;
+                          }
+                          ha-card {
+                            box-shadow: none;
+                            background: none;
+                            margin-bottom: -40px                
+                  - type: custom:mushroom-light-card
+                    entity: light.led_salon
+                    layout: horizontal
+                    use_light_color: true
+                    show_brightness_control: true
+                    show_color_control: true
+                    show_color_temp_control: true
+                    fill_container: true
+                    icon: mdi:led-strip-variant
+                  - type: custom:mushroom-light-card
+                    entity: light.lumiere_margot
+                    layout: horizontal
+                    use_light_color: true
+                    show_brightness_control: true
+                    show_color_control: true
+                    show_color_temp_control: true
+                    fill_container: true
+                    icon: mdi:lightbulb-on
+                  - type: custom:mushroom-light-card
+                    entity: light.lumiere_leonie
+                    layout: horizontal
+                    use_light_color: true
+                    show_brightness_control: true
+                    show_color_control: true
+                    show_color_temp_control: true
+                    fill_container: true
+                    icon: mdi:lightbulb-on
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-entity-card
+                        entity: switch.prise_aquarium
+                        fill_container: true
+                        icon: mdi:fishbowl
+                        icon_color: yellow
+                        tap_action:
+                          action: toggle
+                        layout: horizontal
+                      - type: custom:mushroom-entity-card
+                        entity: switch.0x50325ffffe305b77
+                        fill_container: true
+                        icon: mdi:lightbulb-on
+                        icon_color: yellow
+                        tap_action:
+                          action: toggle
+                        layout: horizontal
+                card_mod:
+                  style: |
+                    ha-card { 
+                    border-radius: 30px;
+                    }              
+        card_mod:
+          style: |
+            ha-card {
+              padding: 1px;
+
+              background: rgba(var(--rgb-primary-text-color), 0.01);
+            }
+  - title: Garage
+    path: Garage
+    icon: mdi:garage-variant
+    theme: noctis
+    badges: []
+    cards:
+      - type: custom:stack-in-card
+        cards:
+          - type: custom:layout-card
+            layout_type: masonry
+            layout: {}
+            cards:
+              - type: custom:swipe-card
+                cards:
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home
+                        layout: vertical
+                        icon_color: '#0066CC'
+                        tap_action:
+                          action: navigate
+                          navigation_path: home
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-shutter
+                        layout: vertical
+                        icon_color: '#00FF80'
+                        tap_action:
+                          action: navigate
+                          navigation_path: volets
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:lightbulb
+                        layout: vertical
+                        icon_color: '#FFFF00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: lumiere
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:garage-variant
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Garage
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:thermometer
+                        layout: vertical
+                        icon_color: '#FF3333'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Température
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-open-variant
+                        layout: vertical
+                        icon_color: '#808080'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ouverture
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                              }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:pool
+                        layout: vertical
+                        icon_color: '#0000FF'
+                        tap_action:
+                          action: navigate
+                          navigation_path: piscine
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:music
+                        layout: vertical
+                        icon_color: purple
+                        tap_action:
+                          action: navigate
+                          navigation_path: musique
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:television-classic
+                        layout: vertical
+                        icon_color: '#FF3399'
+                        tap_action:
+                          action: navigate
+                          navigation_path: télé
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:security
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Securité
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:network
+                        layout: vertical
+                        icon_color: '#00CC00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: network
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }            
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home-assistant
+                        layout: vertical
+                        icon_color: '#87cefa'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ha
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }   
+              - square: true
+                columns: 2
+                type: grid
+                cards:
+                  - type: custom:vertical-stack-in-card
+                    card_mod:
+                      style: |
+                        ha-card { 
+                        border-radius: 20px;
+                        height: 180px
+                        } 
+                    cards:
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:mushroom-template-card
+                            icon: >-
+                              {% set
+                              state=states('binary_sensor.detecteur_garage_marion_contact')
+                              %}
+
+                              {% if state=='off' %}
+
+                              mdi:garage-variant
+
+                              {% elif state=='on' %}
+
+                              mdi:garage-open-variant
+
+                              {% else %}
+
+                              mdi:mailbox-outline
+
+                              {% endif %}
+                            icon_color: '#FF8000'
+                            primary: Porte Marion
+                            layout: horizontal
+                            fill_container: false
+                            entity: sensor.0x00124b00290ffac4_battery
+                            card_mod:
+                              style:
+                                mushroom-state-info$: |
+                                  .primary {
+                                    font-size: 15px !important;
+                                    position: relative;
+                                    top: -20px;
+                                    left: -15px;
+                                    overflow: visible !important;
+                                    white-space: normal !important;
+                                  }
+                                mushroom-shape-icon$: |
+                                  .shape {
+                                    position: relative;
+                                    left: -20px;
+                                    top: -25px;
+                                  }
+                                .: |
+                                  :host {
+                                    --mush-icon-size: 60px;
+                                  }
+                                  style: |
+                                    mushroom-badge-icon {
+                                    left: 40px;
+                                    top: 50px;
+                                  }
+                                  ha-card {
+                                    box-shadow: none;
+                                    background: none;
+                                    margin-bottom: 2px;
+                                    }
+                      - square: false
+                        columns: 2
+                        type: grid
+                        cards:
+                          - type: custom:mushroom-entity-card
+                            entity: script.garage_marion
+                            tap_action:
+                              action: call-service
+                              service: script.garage_marion
+                              target: {}
+                            icon: mdi:arrow-collapse-up
+                            icon_color: '#4caf50'
+                            fill_container: false
+                            layout: vertical
+                            secondary_info: none
+                            primary_info: none
+                            card_mod:
+                              style: |
+                                ha-card {
+                                box-shadow: none;
+                                background: none;
+                                margin-top: -20%;
+                                }
+                              mushroom-shape-icon$: |
+                                .shape {
+                                  position: relative;
+                                  left: -20px;
+                                  top: -25px;
+                                  }
+                              .: |
+                                :host {
+                                  --mush-icon-size: 60px;
+                                  }
+                          - type: custom:mushroom-entity-card
+                            entity: script.garage_marion
+                            tap_action:
+                              action: call-service
+                              service: script.garage_marion
+                              target: {}
+                            icon: mdi:arrow-collapse-down
+                            icon_color: '#4caf50'
+                            fill_container: false
+                            layout: vertical
+                            secondary_info: none
+                            primary_info: none
+                            card_mod:
+                              style: |
+                                ha-card {
+                                box-shadow: none;
+                                background: none;
+                                margin-top: -20%;
+                                }
+                              mushroom-shape-icon$: |
+                                .shape {
+                                  position: relative;
+                                  left: -20px;
+                                  top: -25px;
+                                  }
+                              .: |
+                                :host {
+                                  --mush-icon-size: 60px;
+                                  }
+                  - type: custom:vertical-stack-in-card
+                    card_mod:
+                      style: |
+                        ha-card { 
+                        border-radius: 20px;
+                        height: 180px
+                        } 
+                    cards:
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:mushroom-template-card
+                            icon: >-
+                              {% set
+                              state=states('binary_sensor.0x00124b002a4ea21c_contact')
+                              %}
+
+                              {% if state=='off' %}
+
+                              mdi:garage-variant
+
+                              {% elif state=='on' %}
+
+                              mdi:garage-open-variant
+
+                              {% else %}
+
+                              mdi:mailbox-outline
+
+                              {% endif %}
+                            icon_color: '#FF8000'
+                            primary: Porte Lionel
+                            layout: horizontal
+                            fill_container: false
+                            entity: sensor.0x00124b00290ffac4_battery
+                            card_mod:
+                              style:
+                                mushroom-state-info$: |
+                                  .primary {
+                                    font-size: 15px !important;
+                                    position: relative;
+                                    top: -20px;
+                                    left: -15px;
+                                    overflow: visible !important;
+                                    white-space: normal !important;
+                                  }
+                                mushroom-shape-icon$: |
+                                  .shape {
+                                    position: relative;
+                                    left: -20px;
+                                    top: -25px;
+                                  }
+                                .: |
+                                  :host {
+                                    --mush-icon-size: 60px;
+                                  }
+                                  style: |
+                                    mushroom-badge-icon {
+                                    left: 40px;
+                                    top: 50px;
+                                  }
+                                  ha-card {
+                                    box-shadow: none;
+                                    background: none;
+                                    margin-bottom: 2px;
+                                    }
+                      - square: false
+                        columns: 2
+                        type: grid
+                        cards:
+                          - type: custom:mushroom-entity-card
+                            entity: script.garage_lionel
+                            tap_action:
+                              action: call-service
+                              service: script.garage_lionel
+                              target: {}
+                            icon: mdi:arrow-collapse-up
+                            icon_color: '#4caf50'
+                            fill_container: false
+                            layout: vertical
+                            secondary_info: none
+                            primary_info: none
+                            card_mod:
+                              style: |
+                                ha-card {
+                                box-shadow: none;
+                                background: none;
+                                margin-top: -20%;
+                                }
+                              mushroom-shape-icon$: |
+                                .shape {
+                                  position: relative;
+                                  left: -20px;
+                                  top: -25px;
+                                  }
+                              .: |
+                                :host {
+                                  --mush-icon-size: 60px;
+                                  }
+                          - type: custom:mushroom-entity-card
+                            entity: script.garage_lionel
+                            tap_action:
+                              action: call-service
+                              service: script.garage_lionel
+                              target: {}
+                            icon: mdi:arrow-collapse-down
+                            icon_color: '#4caf50'
+                            fill_container: false
+                            layout: vertical
+                            secondary_info: none
+                            primary_info: none
+                            card_mod:
+                              style: |
+                                ha-card {
+                                box-shadow: none;
+                                background: none;
+                                margin-top: -20%;
+                                }
+                              mushroom-shape-icon$: |
+                                .shape {
+                                  position: relative;
+                                  left: -20px;
+                                  top: -25px;
+                                  }
+                              .: |
+                                :host {
+                                  --mush-icon-size: 60px;
+                                  }
+        card_mod:
+          style: |
+            ha-card {
+              padding: 1px;
+
+              background: rgba(var(--rgb-primary-text-color), 0.01);
+            }
+  - theme: noctis
+    title: 'Température '
+    icon: mdi:thermometer
+    path: Température
+    badges: []
+    cards:
+      - type: custom:stack-in-card
+        cards:
+          - type: custom:layout-card
+            layout_type: masonry
+            layout: {}
+            cards:
+              - type: custom:swipe-card
+                cards:
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home
+                        layout: vertical
+                        icon_color: '#0066CC'
+                        tap_action:
+                          action: navigate
+                          navigation_path: home
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-shutter
+                        layout: vertical
+                        icon_color: '#00FF80'
+                        tap_action:
+                          action: navigate
+                          navigation_path: volets
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:lightbulb
+                        layout: vertical
+                        icon_color: '#FFFF00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: lumiere
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:garage-variant
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Garage
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:thermometer
+                        layout: vertical
+                        icon_color: '#FF3333'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Température
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-open-variant
+                        layout: vertical
+                        icon_color: '#808080'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ouverture
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                              }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:pool
+                        layout: vertical
+                        icon_color: '#0000FF'
+                        tap_action:
+                          action: navigate
+                          navigation_path: piscine
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:music
+                        layout: vertical
+                        icon_color: purple
+                        tap_action:
+                          action: navigate
+                          navigation_path: musique
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:television-classic
+                        layout: vertical
+                        icon_color: '#FF3399'
+                        tap_action:
+                          action: navigate
+                          navigation_path: télé
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:security
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Securité
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:network
+                        layout: vertical
+                        icon_color: '#00CC00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: network
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }            
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home-assistant
+                        layout: vertical
+                        icon_color: '#87cefa'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ha
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }   
+              - square: true
+                columns: 3
+                type: grid
+                cards:
+                  - type: custom:vertical-stack-in-card
+                    card_mod:
+                      style: |
+                        ha-card { 
+                        border-radius: 20px;
+                        height: 180px
+                        } 
+                    cards:
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:mushroom-template-card
+                            icon: mdi:thermometer
+                            icon_color: red
+                            primary: Chambre Malio
+                            secondary: |
+                              {{ states('sensor.0x00124b00290ffac4_battery') }}%
+                            layout: horizontal
+                            fill_container: false
+                            entity: sensor.0x00124b00290ffac4_battery
+                            card_mod:
+                              style:
+                                mushroom-state-info$: |
+                                  .primary {
+                                    font-size: 15px !important;
+                                    position: relative;
+                                    top: -10px;
+                                    left: -27px;
+                                    overflow: visible !important;
+                                    white-space: normal !important;
+                                  }
+                                  .secondary {
+                                    position: relative;
+                                    overflow: visible !important;
+                                    top: -29px;
+                                    left: 27px;
+                                  }
+                                mushroom-shape-icon$: |
+                                  .shape {
+                                    position: relative;
+                                    left: -20px;
+                                    top: -25px;
+                                  }
+                                .: |
+                                  :host {
+                                    --mush-icon-size: 60px;
+                                  }
+                                  style: |
+                                    mushroom-badge-icon {
+                                    left: 40px;
+                                    top: 50px;
+                                  }
+                                  ha-card {
+                                    box-shadow: none;
+                                    background: none;
+                                    margin-bottom: 2px;
+                                    }
+                      - square: false
+                        columns: 2
+                        type: grid
+                        cards:
+                          - type: custom:mushroom-entity-card
+                            entity: sensor.0x00124b00290ffac4_temperature
+                            icon_color: '#4caf50'
+                            name: Température
+                            fill_container: false
+                            layout: vertical
+                            secondary_info: none
+                            primary_info: state
+                            card_mod:
+                              style: |
+                                ha-card {
+                                box-shadow: none;
+                                background: none;
+                                margin-top: -55%;
+                                }
+                          - type: custom:mushroom-entity-card
+                            entity: sensor.0x00124b00290ffac4_humidity
+                            primary_info: state
+                            secondary_info: none
+                            name: Humidity
+                            icon_color: '#2196f3'
+                            layout: vertical
+                            card_mod:
+                              style: |
+                                ha-card {
+                                box-shadow: none;
+                                background: none;
+                                margin-top: -55%;
+                                }
+                      - type: custom:mini-graph-card
+                        entities:
+                          - entity: sensor.0x00124b00290ffac4_temperature
+                            name: Temperature
+                            color: '#4caf50'
+                          - entity: sensor.0x00124b00290ffac4_humidity
+                            name: Humidity
+                            color: '#2196f3'
+                            y_axis: secondary
+                        hours_to_show: 24
+                        line_width: 3
+                        font_size: 50
+                        animate: true
+                        show:
+                          name: false
+                          icon: false
+                          state: false
+                          legend: false
+                          fill: true
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                            margin-left: auto;
+                            margin-right: auto;
+                            margin-top: -9%;
+                            }
+                  - type: custom:vertical-stack-in-card
+                    card_mod:
+                      style: |
+                        ha-card { 
+                        border-radius: 20px;
+                        height: 180px
+                        } 
+                    cards:
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:mushroom-template-card
+                            icon: mdi:thermometer
+                            icon_color: red
+                            primary: Chambre Margot
+                            secondary: |
+                              {{ states('sensor.0x00124b00290ff77c_battery') }}%
+                            layout: horizontal
+                            fill_container: false
+                            entity: sensor.0x00124b00290ff77c_battery
+                            card_mod:
+                              style:
+                                mushroom-state-info$: |
+                                  .primary {
+                                    font-size: 15px !important;
+                                    position: relative;
+                                    top: -10px;
+                                    left: -27px;
+                                    overflow: visible !important;
+                                    white-space: normal !important;
+                                  }
+                                  .secondary {
+                                    position: relative;
+                                    overflow: visible !important;
+                                    top: -29px;
+                                    left: 27px;
+                                  }
+                                mushroom-shape-icon$: |
+                                  .shape {
+                                    position: relative;
+                                    left: -20px;
+                                    top: -25px;
+                                  }
+                                .: |
+                                  :host {
+                                    --mush-icon-size: 60px;
+                                  }
+                                  style: |
+                                    mushroom-badge-icon {
+                                    left: 40px;
+                                    top: 50px;
+                                  }
+                                  ha-card {
+                                    box-shadow: none;
+                                    background: none;
+                                    margin-bottom: 2px;
+                                    }
+                      - square: false
+                        columns: 2
+                        type: grid
+                        cards:
+                          - type: custom:mushroom-entity-card
+                            entity: sensor.0x00124b00290ff77c_temperature
+                            icon_color: '#4caf50'
+                            name: Température
+                            fill_container: false
+                            layout: vertical
+                            secondary_info: none
+                            primary_info: state
+                            card_mod:
+                              style: |
+                                ha-card {
+                                box-shadow: none;
+                                background: none;
+                                margin-top: -55%;
+                                }
+                          - type: custom:mushroom-entity-card
+                            entity: sensor.0x00124b00290ff77c_humidity
+                            primary_info: state
+                            secondary_info: none
+                            name: Humidity
+                            icon_color: '#2196f3'
+                            layout: vertical
+                            card_mod:
+                              style: |
+                                ha-card {
+                                box-shadow: none;
+                                background: none;
+                                margin-top: -55%;
+                                }
+                      - type: custom:mini-graph-card
+                        entities:
+                          - entity: sensor.0x00124b00290ff77c_temperature
+                            name: Temperature
+                            color: '#4caf50'
+                          - entity: sensor.0x00124b00290ff77c_humidity
+                            name: Humidity
+                            color: '#2196f3'
+                            y_axis: secondary
+                        hours_to_show: 24
+                        line_width: 3
+                        font_size: 50
+                        animate: true
+                        show:
+                          name: false
+                          icon: false
+                          state: false
+                          legend: false
+                          fill: true
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                            margin-left: auto;
+                            margin-right: auto;
+                            margin-top: -9%;
+                            }
+                  - type: custom:vertical-stack-in-card
+                    card_mod:
+                      style: |
+                        ha-card { 
+                        border-radius: 20px;
+                        height: 180px
+                        } 
+                    cards:
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:mushroom-template-card
+                            icon: mdi:thermometer
+                            icon_color: red
+                            primary: Chambre Léonie
+                            secondary: |
+                              {{ states('sensor.0x00124b00290ff788_battery') }}%
+                            layout: horizontal
+                            fill_container: false
+                            entity: sensor.0x00124b00290ff788_battery
+                            card_mod:
+                              style:
+                                mushroom-state-info$: |
+                                  .primary {
+                                    font-size: 15px !important;
+                                    position: relative;
+                                    top: -10px;
+                                    left: -27px;
+                                    overflow: visible !important;
+                                    white-space: normal !important;
+                                  }
+                                  .secondary {
+                                    position: relative;
+                                    overflow: visible !important;
+                                    top: -29px;
+                                    left: 27px;
+                                  }
+                                mushroom-shape-icon$: |
+                                  .shape {
+                                    position: relative;
+                                    left: -20px;
+                                    top: -25px;
+                                  }
+                                .: |
+                                  :host {
+                                    --mush-icon-size: 60px;
+                                  }
+                                  style: |
+                                    mushroom-badge-icon {
+                                    left: 40px;
+                                    top: 50px;
+                                  }
+                                  ha-card {
+                                    box-shadow: none;
+                                    background: none;
+                                    margin-bottom: 2px;
+                                    }
+                      - square: false
+                        columns: 2
+                        type: grid
+                        cards:
+                          - type: custom:mushroom-entity-card
+                            entity: sensor.0x00124b00290ff788_temperature
+                            icon_color: '#4caf50'
+                            name: Température
+                            fill_container: false
+                            layout: vertical
+                            secondary_info: none
+                            primary_info: state
+                            card_mod:
+                              style: |
+                                ha-card {
+                                box-shadow: none;
+                                background: none;
+                                margin-top: -55%;
+                                }
+                          - type: custom:mushroom-entity-card
+                            entity: sensor.0x00124b00290ff788_humidity
+                            primary_info: state
+                            secondary_info: none
+                            name: Humidity
+                            icon_color: '#2196f3'
+                            layout: vertical
+                            card_mod:
+                              style: |
+                                ha-card {
+                                box-shadow: none;
+                                background: none;
+                                margin-top: -55%;
+                                }
+                      - type: custom:mini-graph-card
+                        entities:
+                          - entity: sensor.0x00124b00290ff788_temperature
+                            name: Temperature
+                            color: '#4caf50'
+                          - entity: sensor.0x00124b00290ff788_humidity
+                            name: Humidity
+                            color: '#2196f3'
+                            y_axis: secondary
+                        hours_to_show: 24
+                        line_width: 3
+                        font_size: 50
+                        animate: true
+                        show:
+                          name: false
+                          icon: false
+                          state: false
+                          legend: false
+                          fill: true
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                            margin-left: auto;
+                            margin-right: auto;
+                            margin-top: -9%;
+                            }
+                  - type: custom:vertical-stack-in-card
+                    card_mod:
+                      style: |
+                        ha-card { 
+                        border-radius: 20px;
+                        height: 180px
+                        } 
+                    cards:
+                      - type: horizontal-stack
+                        cards:
+                          - type: custom:mushroom-template-card
+                            icon: mdi:thermometer
+                            icon_color: red
+                            primary: Pièce de vie
+                            secondary: |
+                              {{ states('sensor.0x00124b0029100ff8_battery') }}%
+                            layout: horizontal
+                            fill_container: false
+                            entity: sensor.0x00124b0029100ff8_battery
+                            card_mod:
+                              style:
+                                mushroom-state-info$: |
+                                  .primary {
+                                    font-size: 15px !important;
+                                    position: relative;
+                                    top: -10px;
+                                    left: -27px;
+                                    overflow: visible !important;
+                                    white-space: normal !important;
+                                  }
+                                  .secondary {
+                                    position: relative;
+                                    overflow: visible !important;
+                                    top: -29px;
+                                    left: 27px;
+                                  }
+                                mushroom-shape-icon$: |
+                                  .shape {
+                                    position: relative;
+                                    left: -20px;
+                                    top: -25px;
+                                  }
+                                .: |
+                                  :host {
+                                    --mush-icon-size: 60px;
+                                  }
+                                  style: |
+                                    mushroom-badge-icon {
+                                    left: 40px;
+                                    top: 50px;
+                                  }
+                                  ha-card {
+                                    box-shadow: none;
+                                    background: none;
+                                    margin-bottom: 2px;
+                                    }
+                      - square: false
+                        columns: 2
+                        type: grid
+                        cards:
+                          - type: custom:mushroom-entity-card
+                            entity: sensor.0x00124b0029100ff8_temperature
+                            icon_color: '#4caf50'
+                            name: Température
+                            fill_container: false
+                            layout: vertical
+                            secondary_info: none
+                            primary_info: state
+                            card_mod:
+                              style: |
+                                ha-card {
+                                box-shadow: none;
+                                background: none;
+                                margin-top: -55%;
+                                }
+                          - type: custom:mushroom-entity-card
+                            entity: sensor.0x00124b0029100ff8_humidity
+                            primary_info: state
+                            secondary_info: none
+                            name: Humidity
+                            icon_color: '#2196f3'
+                            layout: vertical
+                            card_mod:
+                              style: |
+                                ha-card {
+                                box-shadow: none;
+                                background: none;
+                                margin-top: -55%;
+                                }
+                      - type: custom:mini-graph-card
+                        entities:
+                          - entity: sensor.0x00124b0029100ff8_temperature
+                            name: Temperature
+                            color: '#4caf50'
+                          - entity: sensor.0x00124b0029100ff8_humidity
+                            name: Humidity
+                            color: '#2196f3'
+                            y_axis: secondary
+                        hours_to_show: 24
+                        line_width: 3
+                        font_size: 50
+                        animate: true
+                        show:
+                          name: false
+                          icon: false
+                          state: false
+                          legend: false
+                          fill: true
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                            margin-left: auto;
+                            margin-right: auto;
+                            margin-top: -9%;
+                            }                    
+        card_mod:
+          style: |
+            ha-card {
+              padding: 1px;
+
+              background: rgba(var(--rgb-primary-text-color), 0.01);
+            }
+  - theme: noctis
+    title: Multimedia
+    path: multimedia
+    icon: mdi:multimedia
+    badges: []
+    cards:
+      - type: custom:stack-in-card
+        cards:
+          - type: custom:layout-card
+            layout_type: masonry
+            layout: {}
+            cards:
+              - type: custom:swipe-card
+                cards:
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home
+                        layout: vertical
+                        icon_color: '#0066CC'
+                        tap_action:
+                          action: navigate
+                          navigation_path: home
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-shutter
+                        layout: vertical
+                        icon_color: '#00FF80'
+                        tap_action:
+                          action: navigate
+                          navigation_path: volets
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:lightbulb
+                        layout: vertical
+                        icon_color: '#FFFF00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: lumiere
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:garage-variant
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Garage
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:thermometer
+                        layout: vertical
+                        icon_color: '#FF3333'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Température
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-open-variant
+                        layout: vertical
+                        icon_color: '#808080'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ouverture
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                              }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:pool
+                        layout: vertical
+                        icon_color: '#0000FF'
+                        tap_action:
+                          action: navigate
+                          navigation_path: piscine
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:music
+                        layout: vertical
+                        icon_color: purple
+                        tap_action:
+                          action: navigate
+                          navigation_path: musique
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:television-classic
+                        layout: vertical
+                        icon_color: '#FF3399'
+                        tap_action:
+                          action: navigate
+                          navigation_path: télé
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:security
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Securité
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:network
+                        layout: vertical
+                        icon_color: '#00CC00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: network
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }            
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home-assistant
+                        layout: vertical
+                        icon_color: '#87cefa'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ha
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }   
+              - type: custom:stack-in-card
+                cards:
+                  - type: custom:layout-card
+                    layout_type: masonry
+                    layout: {}
+                    cards: null
+                  - type: custom:mini-media-player
+                    entity: media_player.salle_a_manger
+                    group: false
+                    artwork: full-cover
+                    source: icon
+                    icon: mdi:apple
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background: var(--card-background-color)
+                          border-radius: 30px;
+                          margin-left: auto;
+                          margin-right: auto;
+                          margin-bottom: 0px;
+                          position: relative;
+                        } 
+        card_mod:
+          style: |
+            ha-card {
+              padding: 1px;
+
+              background: rgba(var(--rgb-primary-text-color), 0.01);
+            }
+  - theme: noctis
+    title: Météo
+    path: meteo
+    icon: mdi:weather-partly-cloudy
+    badges: []
+    cards:
+      - type: custom:stack-in-card
+        cards:
+          - type: custom:layout-card
+            layout_type: masonry
+            layout: {}
+            cards:
+              - type: custom:swipe-card
+                cards:
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home
+                        layout: vertical
+                        icon_color: '#0066CC'
+                        tap_action:
+                          action: navigate
+                          navigation_path: home
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-shutter
+                        layout: vertical
+                        icon_color: '#00FF80'
+                        tap_action:
+                          action: navigate
+                          navigation_path: volets
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:lightbulb
+                        layout: vertical
+                        icon_color: '#FFFF00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: lumiere
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:garage-variant
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Garage
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:thermometer
+                        layout: vertical
+                        icon_color: '#FF3333'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Température
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-open-variant
+                        layout: vertical
+                        icon_color: '#808080'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ouverture
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                              }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:pool
+                        layout: vertical
+                        icon_color: '#0000FF'
+                        tap_action:
+                          action: navigate
+                          navigation_path: piscine
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:music
+                        layout: vertical
+                        icon_color: purple
+                        tap_action:
+                          action: navigate
+                          navigation_path: musique
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:television-classic
+                        layout: vertical
+                        icon_color: '#FF3399'
+                        tap_action:
+                          action: navigate
+                          navigation_path: télé
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:security
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Securité
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:network
+                        layout: vertical
+                        icon_color: '#00CC00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: network
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }            
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home-assistant
+                        layout: vertical
+                        icon_color: '#87cefa'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ha
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }   
+              - type: custom:meteofrance-weather-card
+                entity: weather.precigne
+                number_of_forecasts: '5'
+                cloudCoverEntity: sensor.x_cloud_cover
+                rainChanceEntity: sensor.x_rain_chance
+                freezeChanceEntity: sensor.x_freeze_chance
+                snowChanceEntity: sensor.x_snow_chance
+                uvEntity: sensor.x_uv
+                rainForecastEntity: sensor.x_next_rain
+                forecast: true
+                one_hour_forecast: false
+                card_mod:
+                  style: |
+                    ha-card { 
+                      background: none;
+                      box-shadow: none;
+                      border-radius: 30px;
+                      margin-left: auto;
+                      margin-right: auto;
+                    } 
+        card_mod:
+          style: |
+            ha-card {
+              padding: 1px;
+              background: rgba(var(--rgb-primary-text-color), 0.01);
+            }
+  - theme: noctis
+    title: Calendrier
+    path: calendrier
+    icon: mdi:calendar
+    badges: []
+    cards:
+      - type: custom:stack-in-card
+        cards:
+          - type: custom:layout-card
+            layout_type: masonry
+            layout: {}
+            cards:
+              - type: custom:swipe-card
+                cards:
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home
+                        layout: vertical
+                        icon_color: '#0066CC'
+                        tap_action:
+                          action: navigate
+                          navigation_path: home
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-shutter
+                        layout: vertical
+                        icon_color: '#00FF80'
+                        tap_action:
+                          action: navigate
+                          navigation_path: volets
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:lightbulb
+                        layout: vertical
+                        icon_color: '#FFFF00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: lumiere
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:garage-variant
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Garage
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:thermometer
+                        layout: vertical
+                        icon_color: '#FF3333'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Température
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-open-variant
+                        layout: vertical
+                        icon_color: '#808080'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ouverture
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                              }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:pool
+                        layout: vertical
+                        icon_color: '#0000FF'
+                        tap_action:
+                          action: navigate
+                          navigation_path: piscine
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:music
+                        layout: vertical
+                        icon_color: purple
+                        tap_action:
+                          action: navigate
+                          navigation_path: musique
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:television-classic
+                        layout: vertical
+                        icon_color: '#FF3399'
+                        tap_action:
+                          action: navigate
+                          navigation_path: télé
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:security
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Securité
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:network
+                        layout: vertical
+                        icon_color: '#00CC00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: network
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }            
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home-assistant
+                        layout: vertical
+                        icon_color: '#87cefa'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ha
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }   
+              - initial_view: dayGridMonth
+                type: calendar
+                entities:
+                  - calendar.travail
+                  - calendar.personnel
+                card_mod:
+                  style: |
+                    ha-card { 
+                      background: none;
+                      box-shadow: none;
+                      border-radius: 30px;
+                      margin-left: auto;
+                      margin-right: auto;
+                    } 
+        card_mod:
+          style: |
+            ha-card {
+              padding: 1px;
+              background: rgba(var(--rgb-primary-text-color), 0.01);
+            }
+  - title: Piscine
+    path: piscine
+    icon: mdi:pool
+    theme: noctis
+    badges: []
+    cards:
+      - type: custom:stack-in-card
+        cards:
+          - type: custom:layout-card
+            layout_type: masonry
+            layout: {}
+            cards:
+              - type: custom:swipe-card
+                cards:
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home
+                        layout: vertical
+                        icon_color: '#0066CC'
+                        tap_action:
+                          action: navigate
+                          navigation_path: home
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-shutter
+                        layout: vertical
+                        icon_color: '#00FF80'
+                        tap_action:
+                          action: navigate
+                          navigation_path: volets
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:lightbulb
+                        layout: vertical
+                        icon_color: '#FFFF00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: lumiere
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:garage-variant
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Garage
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:thermometer
+                        layout: vertical
+                        icon_color: '#FF3333'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Température
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-open-variant
+                        layout: vertical
+                        icon_color: '#808080'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ouverture
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                              }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:pool
+                        layout: vertical
+                        icon_color: '#0000FF'
+                        tap_action:
+                          action: navigate
+                          navigation_path: piscine
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:music
+                        layout: vertical
+                        icon_color: purple
+                        tap_action:
+                          action: navigate
+                          navigation_path: musique
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:television-classic
+                        layout: vertical
+                        icon_color: '#FF3399'
+                        tap_action:
+                          action: navigate
+                          navigation_path: télé
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:security
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Securité
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:network
+                        layout: vertical
+                        icon_color: '#00CC00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: network
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }            
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home-assistant
+                        layout: vertical
+                        icon_color: '#87cefa'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ha
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }   
+              - type: custom:vertical-stack-in-card
+                card_mod:
+                  style: |
+                    ha-card { 
+                    border-radius: 20px;
+                    height: 180px
+                    } 
+                cards:
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:pool-thermometer
+                        icon_color: blue
+                        primary: Température eau
+                        secondary: >-
+                          batterie {{
+                          states('sensor.temperature_piscine_battery') }}%
+                        layout: horizontal
+                        fill_container: false
+                        entity: sensor.temperature_piscine_battery
+                        card_mod:
+                          style:
+                            mushroom-state-info$: |
+                              .primary {
+                                font-size: 20px !important;
+                                position: relative;
+                                top: -10px;
+                                left: 0px;
+                                overflow: visible !important;
+                                white-space: normal !important;
+                              }
+                              .secondary {
+                                position: relative;
+                                overflow: visible !important;
+                                top: -33px;
+                                left: 230px;
+                              }
+                            mushroom-shape-icon$: |
+                              .shape {
+                                position: relative;
+                                left: -20px;
+                                top: -25px;
+                              }
+                            .: |
+                              :host {
+                                --mush-icon-size: 60px;
+                              }
+                              style: |
+                                mushroom-badge-icon {
+                                left: 40px;
+                                top: 50px;
+                              }
+                              ha-card {
+                                box-shadow: none;
+                                background: none;
+                                margin-bottom: 2px;
+                                }
+                  - type: custom:mushroom-entity-card
+                    entity: sensor.temperature_piscine_temperature
+                    name: false
+                    layout: horizontal
+                    fill_container: false
+                    icon: none
+                    icon_color: none
+                    primary_info: none
+                    card_mod:
+                      style:
+                        mushroom-state-info$: |
+                          .secondary {
+                            overflow: visible !important;
+                            font-size: 20px !important;
+                            position: relative;
+                            top: -40px;
+                            left: -30px
+                          }
+                          ha-card {
+                            box-shadow: none;
+                            background: none;
+                          }
+                  - type: custom:mini-graph-card
+                    entities:
+                      - entity: sensor.temperature_piscine_temperature
+                        name: Temperature
+                        color: '#4caf50'
+                    hours_to_show: 24
+                    line_width: 3
+                    font_size: 50
+                    animate: true
+                    show:
+                      name: false
+                      icon: false
+                      state: false
+                      legend: false
+                      fill: true
+                      labels: true
+                    card_mod:
+                      style: |
+                        ha-card {
+                        box-shadow: none;
+                        background: none;
+                        margin-top: -17%;
+                        }                 
+        card_mod:
+          style: |
+            ha-card {
+              padding: 1px;
+
+              background: rgba(var(--rgb-primary-text-color), 0.01);
+            }
+  - title: HA
+    path: ha
+    icon: mdi:home-assistant
+    theme: noctis
+    badges: []
+    cards:
+      - type: custom:stack-in-card
+        cards:
+          - type: custom:layout-card
+            layout_type: masonry
+            layout: {}
+            cards:
+              - type: custom:swipe-card
+                cards:
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home
+                        layout: vertical
+                        icon_color: '#0066CC'
+                        tap_action:
+                          action: navigate
+                          navigation_path: home
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-shutter
+                        layout: vertical
+                        icon_color: '#00FF80'
+                        tap_action:
+                          action: navigate
+                          navigation_path: volets
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:lightbulb
+                        layout: vertical
+                        icon_color: '#FFFF00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: lumiere
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:garage-variant
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Garage
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:thermometer
+                        layout: vertical
+                        icon_color: '#FF3333'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Température
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-open-variant
+                        layout: vertical
+                        icon_color: '#808080'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ouverture
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                              }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:pool
+                        layout: vertical
+                        icon_color: '#0000FF'
+                        tap_action:
+                          action: navigate
+                          navigation_path: piscine
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:music
+                        layout: vertical
+                        icon_color: purple
+                        tap_action:
+                          action: navigate
+                          navigation_path: musique
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:television-classic
+                        layout: vertical
+                        icon_color: '#FF3399'
+                        tap_action:
+                          action: navigate
+                          navigation_path: télé
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:security
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Securité
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:network
+                        layout: vertical
+                        icon_color: '#00CC00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: network
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }            
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home-assistant
+                        layout: vertical
+                        icon_color: '#87cefa'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ha
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }                   
+              - type: custom:mushroom-chips-card
+                chips:
+                  - type: entity
+                    entity: update.home_assistant_core_update
+                    use_entity_picture: true
+                    content_info: name
+                    name: HA
+                    tap_action:
+                      action: navigate
+                      navigation_path: ha
+                  - type: entity
+                    entity: update.zigbee2mqtt_update
+                    name: Module
+                    content_info: name
+                    use_entity_picture: true
+                    icon: mdi:puzzle
+                    tap_action:
+                      action: navigate
+                      navigation_path: module
+                  - type: entity
+                    entity: update.hacs_update
+                    use_entity_picture: true
+                    content_info: name
+                    name: HACS
+                    tap_action:
+                      action: navigate
+                      navigation_path: hacs
+                alignment: center
+              - type: vertical-stack
+                cards:
+                  - type: custom:mushroom-title-card
+                    title: Home Assistant Server
+                    subtitle: >
+                      Core v{{ state_attr('update.home_assistant_core_update',
+                      'installed_version') }} - OS v{{
+                      states('sensor.home_assistant_operating_system_version')
+                      }} - Supervisor v{{
+                      state_attr('update.home_assistant_supervisor_update',
+                      'installed_version') }}
+                  - type: custom:mushroom-chips-card
+                    chips:
+                      - type: entity
+                        entity: sensor.processor_temperature
+                        icon_color: orange
+                      - type: entity
+                        entity: sensor.processor_use
+                        icon_color: blue
+                      - type: entity
+                        entity: sensor.memory_use_percent
+                        icon_color: orange
+                      - type: entity
+                        entity: sensor.disk_use_percent_config
+                        icon_color: deep-purple
+                      - type: entity
+                        entity: sensor.network_in_eth0
+                        icon_color: green
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-update-card
+                        entity: update.home_assistant_core_update
+                        name: HA Core
+                        show_buttons_control: true
+                        icon_type: entity-picture
+                        icon: ''
+                        primary_info: name
+                        fill_container: false
+                        card_mod:
+                          style: |
+                            ha-card { 
+                            border-radius: 20px;
+                            height: 180px
+                            }
+                      - type: custom:mushroom-template-card
+                        primary: Version Information
+                        secondary: >-
+                          Installed v{{
+                          state_attr('update.home_assistant_core_update',
+                          'installed_version')}}
+
+                          Latest v{{
+                          state_attr('update.home_assistant_core_update',
+                          'latest_version')}}
+                        icon: mdi:package-variant-closed
+                        multiline_secondary: true
+                        fill_container: true
+                        entity: update.home_assistant_core_update
+                        tap_action:
+                          action: more-info
+                        icon_color: >-
+                          {% if is_state('update.home_assistant_core_update',
+                          'on') %}
+                            orange
+                          {% else %}
+                            green
+                          {% endif %}
+                        badge_color: >-
+                          {% if is_state('update.home_assistant_core_update',
+                          'on') %}
+                            red
+                          {% else %}
+                            blue
+                          {% endif %}
+                        badge_icon: >-
+                          {% if is_state('update.home_assistant_core_update',
+                          'on') %}
+                            mdi:help
+                          {% else %}
+                            mdi:check-bold
+                          {% endif %}
+                        card_mod:
+                          style: |
+                            ha-card { 
+                            border-radius: 20px;
+                            height: 180px
+                            }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-update-card
+                        entity: update.home_assistant_operating_system_update
+                        name: HA OS
+                        show_buttons_control: true
+                        icon_type: entity-picture
+                        card_mod:
+                          style: |
+                            ha-card { 
+                            border-radius: 20px;
+                            height: 180px
+                            }
+                      - type: custom:mushroom-template-card
+                        primary: Version Information
+                        secondary: >-
+                          Installed v{{
+                          states('sensor.home_assistant_operating_system_version')}}
+
+                          Latest v{{
+                          states('sensor.home_assistant_operating_system_newest_version')}}
+                        icon: mdi:package-variant-closed
+                        multiline_secondary: true
+                        fill_container: true
+                        entity: update.home_assistant_operating_system_update
+                        tap_action:
+                          action: more-info
+                        icon_color: >-
+                          {% if
+                          is_state('update.home_assistant_operating_system_update',
+                          'on') %}
+                            orange
+                          {% else %}
+                            green
+                          {% endif %}
+                        badge_color: >-
+                          {% if
+                          is_state('update.home_assistant_operating_system_update',
+                          'on') %}
+                            red
+                          {% else %}
+                            blue
+                          {% endif %}
+                        badge_icon: >-
+                          {% if
+                          is_state('update.home_assistant_operating_system_update',
+                          'on') %}
+                            mdi:help
+                          {% else %}
+                            mdi:check-bold
+                          {% endif %}
+                        card_mod:
+                          style: |
+                            ha-card { 
+                            border-radius: 20px;
+                            height: 180px
+                            }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-update-card
+                        entity: update.home_assistant_supervisor_update
+                        name: HA Supervisor
+                        show_buttons_control: true
+                        icon_type: entity-picture
+                        card_mod:
+                          style: |
+                            ha-card { 
+                            border-radius: 20px;
+                            height: 180px
+                            }
+                      - type: custom:mushroom-template-card
+                        primary: Version Information
+                        secondary: >-
+                          Installed v{{
+                          state_attr('update.home_assistant_supervisor_update',
+                          'installed_version')}}
+
+                          Latest v{{
+                          state_attr('update.home_assistant_supervisor_update',
+                          'latest_version')}}
+                        icon: mdi:package-variant-closed
+                        multiline_secondary: true
+                        fill_container: true
+                        entity: update.home_assistant_core_update
+                        tap_action:
+                          action: more-info
+                        icon_color: >-
+                          {% if
+                          is_state('update.home_assistant_supervisor_update',
+                          'on') %}
+                            orange
+                          {% else %}
+                            green
+                          {% endif %}
+                        badge_color: >-
+                          {% if
+                          is_state('update.home_assistant_supervisor_update',
+                          'on') %}
+                            red
+                          {% else %}
+                            blue
+                          {% endif %}
+                        badge_icon: >-
+                          {% if
+                          is_state('update.home_assistant_supervisor_update',
+                          'on') %}
+                            mdi:help
+                          {% else %}
+                            mdi:check-bold
+                          {% endif %}
+                        card_mod:
+                          style: |
+                            ha-card { 
+                            border-radius: 20px;
+                            height: 180px
+                            }
+        card_mod:
+          style: |
+            ha-card {
+              padding: 1px;
+            }
+  - title: module
+    path: module
+    icon: mdi:puzzle
+    theme: noctis
+    badges: []
+    cards:
+      - type: custom:stack-in-card
+        cards:
+          - type: custom:layout-card
+            layout_type: masonry
+            layout: {}
+            cards:
+              - type: custom:swipe-card
+                cards:
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home
+                        layout: vertical
+                        icon_color: '#0066CC'
+                        tap_action:
+                          action: navigate
+                          navigation_path: home
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-shutter
+                        layout: vertical
+                        icon_color: '#00FF80'
+                        tap_action:
+                          action: navigate
+                          navigation_path: volets
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:lightbulb
+                        layout: vertical
+                        icon_color: '#FFFF00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: lumiere
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:garage-variant
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Garage
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:thermometer
+                        layout: vertical
+                        icon_color: '#FF3333'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Température
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-open-variant
+                        layout: vertical
+                        icon_color: '#808080'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ouverture
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                              }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:pool
+                        layout: vertical
+                        icon_color: '#0000FF'
+                        tap_action:
+                          action: navigate
+                          navigation_path: piscine
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:music
+                        layout: vertical
+                        icon_color: purple
+                        tap_action:
+                          action: navigate
+                          navigation_path: musique
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:television-classic
+                        layout: vertical
+                        icon_color: '#FF3399'
+                        tap_action:
+                          action: navigate
+                          navigation_path: télé
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:security
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Securité
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:network
+                        layout: vertical
+                        icon_color: '#00CC00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: network
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }            
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home-assistant
+                        layout: vertical
+                        icon_color: '#87cefa'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ha
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }                   
+              - type: custom:mushroom-chips-card
+                chips:
+                  - type: entity
+                    entity: update.home_assistant_core_update
+                    use_entity_picture: true
+                    content_info: name
+                    name: HA
+                    tap_action:
+                      action: navigate
+                      navigation_path: ha
+                  - type: entity
+                    entity: update.zigbee2mqtt_update
+                    name: Module
+                    content_info: name
+                    use_entity_picture: true
+                    icon: mdi:puzzle
+                    tap_action:
+                      action: navigate
+                      navigation_path: module
+                  - type: entity
+                    entity: update.hacs_update
+                    use_entity_picture: true
+                    content_info: name
+                    name: HACS
+                    tap_action:
+                      action: navigate
+                      navigation_path: hacs
+                alignment: center
+              - type: vertical-stack
+                cards:
+                  - type: custom:mushroom-title-card
+                    title: Modules complémentaires
+                  - type: custom:mushroom-chips-card
+                    chips:
+                      - type: entity
+                        entity: sensor.processor_temperature
+                        icon_color: orange
+                      - type: entity
+                        entity: sensor.processor_use
+                        icon_color: blue
+                      - type: entity
+                        entity: sensor.memory_use_percent
+                        icon_color: orange
+                      - type: entity
+                        entity: sensor.disk_use_percent_config
+                        icon_color: deep-purple
+                      - type: entity
+                        entity: sensor.network_in_eth0
+                        icon_color: green
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-update-card
+                        entity: update.zigbee2mqtt_update
+                        name: Zigbee2MQTT
+                        show_buttons_control: true
+                        icon_type: entity-picture
+                        icon: ''
+                        primary_info: name
+                        fill_container: false
+                        card_mod:
+                          style: |
+                            ha-card { 
+                            border-radius: 20px;
+                            height: 180px
+                            }
+                      - type: custom:mushroom-update-card
+                        entity: update.mosquitto_broker_update
+                        name: MQTT
+                        show_buttons_control: true
+                        icon_type: entity-picture
+                        icon: ''
+                        primary_info: name
+                        fill_container: false
+                        card_mod:
+                          style: |
+                            ha-card { 
+                            border-radius: 20px;
+                            height: 180px
+                            }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-update-card
+                        entity: update.file_editor_update
+                        name: File editor
+                        show_buttons_control: true
+                        icon_type: entity-picture
+                        card_mod:
+                          style: |
+                            ha-card { 
+                            border-radius: 20px;
+                            height: 180px
+                            }
+                      - type: custom:mushroom-update-card
+                        entity: update.duck_dns_update
+                        name: DuckDNS
+                        show_buttons_control: true
+                        icon_type: entity-picture
+                        icon: ''
+                        primary_info: name
+                        fill_container: false
+                        card_mod:
+                          style: |
+                            ha-card { 
+                            border-radius: 20px;
+                            height: 180px
+                            }
+        card_mod:
+          style: |
+            ha-card {
+              padding: 1px;
+            }
+  - title: hacs
+    path: hacs
+    icon: hacs:hacs
+    theme: noctis
+    badges: []
+    cards:
+      - type: custom:stack-in-card
+        cards:
+          - type: custom:layout-card
+            layout_type: masonry
+            layout: {}
+            cards:
+              - type: custom:swipe-card
+                cards:
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home
+                        layout: vertical
+                        icon_color: '#0066CC'
+                        tap_action:
+                          action: navigate
+                          navigation_path: home
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-shutter
+                        layout: vertical
+                        icon_color: '#00FF80'
+                        tap_action:
+                          action: navigate
+                          navigation_path: volets
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:lightbulb
+                        layout: vertical
+                        icon_color: '#FFFF00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: lumiere
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:garage-variant
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Garage
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:thermometer
+                        layout: vertical
+                        icon_color: '#FF3333'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Température
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:window-open-variant
+                        layout: vertical
+                        icon_color: '#808080'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ouverture
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                              }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        icon: mdi:pool
+                        layout: vertical
+                        icon_color: '#0000FF'
+                        tap_action:
+                          action: navigate
+                          navigation_path: piscine
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:music
+                        layout: vertical
+                        icon_color: purple
+                        tap_action:
+                          action: navigate
+                          navigation_path: musique
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:television-classic
+                        layout: vertical
+                        icon_color: '#FF3399'
+                        tap_action:
+                          action: navigate
+                          navigation_path: télé
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }
+                      - type: custom:mushroom-template-card
+                        icon: mdi:security
+                        layout: vertical
+                        icon_color: '#FF8000'
+                        tap_action:
+                          action: navigate
+                          navigation_path: Securité
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }           
+                      - type: custom:mushroom-template-card
+                        icon: mdi:network
+                        layout: vertical
+                        icon_color: '#00CC00'
+                        tap_action:
+                          action: navigate
+                          navigation_path: network
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }            
+                      - type: custom:mushroom-template-card
+                        icon: mdi:home-assistant
+                        layout: vertical
+                        icon_color: '#87cefa'
+                        tap_action:
+                          action: navigate
+                          navigation_path: ha
+                        card_mod:
+                          style: |
+                            ha-card {
+                            box-shadow: none;
+                            background: none;
+                                  }                   
+              - type: custom:mushroom-chips-card
+                chips:
+                  - type: entity
+                    entity: update.home_assistant_core_update
+                    use_entity_picture: true
+                    content_info: name
+                    name: HA
+                    tap_action:
+                      action: navigate
+                      navigation_path: ha
+                  - type: entity
+                    entity: update.zigbee2mqtt_update
+                    name: Module
+                    content_info: name
+                    use_entity_picture: true
+                    icon: mdi:puzzle
+                    tap_action:
+                      action: navigate
+                      navigation_path: module
+                  - type: entity
+                    entity: update.hacs_update
+                    use_entity_picture: true
+                    content_info: name
+                    name: HACS
+                    tap_action:
+                      action: navigate
+                      navigation_path: hacs
+                alignment: center
+              - type: vertical-stack
+                cards:
+                  - type: custom:mushroom-title-card
+                    title: HACS
+                    subtitle: >
+                      Core v{{ state_attr('update.hacs_update',
+                      'installed_version') }} - Latest v{{
+                      state_attr('update.hacs_update', 'latest_version') }}
+                  - type: custom:mushroom-chips-card
+                    chips:
+                      - type: template
+                        icon: mdi:web
+                        icon_color: blue
+                        content: Mise à jour
+                        tap_action:
+                          action: url
+                          url_path: https://github.com/hacs/integration/releases
+                      - type: template
+                        entity: update.hacs_update
+                        content: >-
+                          Version{{ state_attr('update.hacs_update',
+                          'installed_version') }}
+                        icon_color: green
+                        icon: mdi:package-variant-closed
+                        tap_action:
+                          action: none
+                      - type: template
+                        entity: update.hacs_update
+                        content: >-
+                          Dernière version{{ state_attr('update.hacs_update',
+                          'latest_version') }}
+                        icon_color: orange
+                        icon: mdi:package-variant-closed
+                        tap_action:
+                          action: none
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-update-card
+                        entity: update.hacs_update
+                        name: HACS
+                        show_buttons_control: true
+                        icon_type: entity-picture
+                        icon: ''
+                        primary_info: name
+                        fill_container: false
+                        card_mod:
+                          style: |
+                            ha-card { 
+                            border-radius: 20px;
+                            height: 180px
+                            }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-update-card
+                        entity: update.mushroom_update
+                        name: Mushroom
+                        show_buttons_control: true
+                        icon_type: entity-picture
+                        layout: horizontal
+                        card_mod:
+                          style: |
+                            ha-card { 
+                            border-radius: 20px;
+                            height: 180px
+                            }
+                      - type: custom:mushroom-update-card
+                        entity: update.tapo_cameras_control_update
+                        name: Camera
+                        show_buttons_control: true
+                        icon_type: entity-picture
+                        icon: ''
+                        primary_info: name
+                        fill_container: false
+                        layout: horizontal
+                        card_mod:
+                          style: |
+                            ha-card { 
+                            border-radius: 20px;
+                            height: 180px
+                            }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mushroom-update-card
+                        entity: update.kiosk_mode_update
+                        name: Kiosk
+                        show_buttons_control: true
+                        icon_type: entity-picture
+                        layout: horizontal
+                        card_mod:
+                          style: |
+                            ha-card { 
+                            border-radius: 20px;
+                            height: 180px
+                            }
+                      - type: custom:mushroom-update-card
+                        entity: update.noctis_update
+                        name: Noctis
+                        show_buttons_control: true
+                        icon_type: entity-picture
+                        icon: ''
+                        primary_info: name
+                        layout: horizontal
+                        fill_container: false
+                        card_mod:
+                          style: |
+                            ha-card { 
+                            border-radius: 20px;
+                            height: 180px
+                            }
+        card_mod:
+          style: |
+            ha-card {
+              padding: 1px;
+            }
